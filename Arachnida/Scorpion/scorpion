@@ -5,23 +5,6 @@ import sys # to handle command line-arguments
 from PIL import Image
 from PIL.ExifTags import TAGS # to open img and extract EXIF data
 
-def get_exif_data(image):
-    print(image)
-    exif_data = {}
-    try:
-        print("deeeeeeeeeeeeeeeeeeeeeeee")
-        info = image._getexif()
-        print("frfrfrfr")
-        if info is not None:
-            for tag, value in info.items():
-                decoded = TAGS.get(tag, tag)
-                exif_data[decoded] = value
-    except AttributeError:
-        print("65656565656")
-        pass
-    return exif_data
-
-
 def display_image_metadata(img_path):
 
     try:
@@ -30,14 +13,17 @@ def display_image_metadata(img_path):
             print(f"Format: {img.format}")
             print(f"Size: {img.size}")
             print(f"Mode: {img.mode}")
-            exif_data = get_exif_data(img_path)
+
+            print()
+            exif_data = img._getexif()
             if exif_data:
-                print("EXIF Data:")
-                for key, value in exif_data.items():
-                    print(f"  {key}: {value}")
+                print(" EXIF Data : ")
+                for tag, value in exif_data.items():
+                    tag_name = TAGS.get(tag, tag)
+                    print(f" -{tag_name}: {value}")
             else:
                 print("No EXIF data found.")
-            print()
+        
     except Exception as e:
         print(f"Error processing {img_path}: {e}")
 

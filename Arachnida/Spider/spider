@@ -7,6 +7,7 @@ from urllib.parse import urljoin, urlparse
 
 MAX_INT = 2147483647
 
+
 def download_img(url, depth, folder, current_depth=0):
     
     if current_depth > depth:
