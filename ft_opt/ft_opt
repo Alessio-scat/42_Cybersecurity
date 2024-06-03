@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+
+import argparse
+import re
+
+def create_ft_opt_key(key):
+    with open("ft_otp.key", 'w') as f:
+        f.write(key)
+
+def verif_key(key):
+
+    content = key
+
+    try:
+        with open(key, 'r') as file:
+            content = file.read()
+    except FileNotFoundError:
+        pass
+
+    pattern = re.compile(r'^[0-9a-fA-F]{64,}$')
+    if pattern.search(content):
+        create_ft_opt_key(content)
+        print("Key was successfully saved in ft_otp.key.")
+    else:
+        print("/ft_otp: error: key must be 64 hexadecimal characters")
+
+if __name__ == '__main__' :
+
+    parser = argparse.ArgumentParser(
+                    prog='ft_otp',
+                    description='program that allows you to store an initial password in file, and that is capable of generating a new one time password every time it is requested.',
+                    epilog='42 Cybersecurity')
+
+    parser.add_argument('-g' , type=str, help='Generate and store key')
+    parser.add_argument('-k' , type=str, help='Generate OTP based on key')
+    args = parser.parse_args()
+
+    if args.g is None and args.k is None :
+        print("Usage: ./ft_opt -g key or ./ft_opt -k ft_opt.key")
+    elif args.g:
+        verif_key(args.g)
+    
+    # print(args)
