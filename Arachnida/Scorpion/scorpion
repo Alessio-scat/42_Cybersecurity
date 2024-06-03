@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+import os
+import sys # to handle command line-arguments
+from PIL import Image
+from PIL.ExifTags import TAGS # to open img and extract EXIF data
+
+def get_exif_data(image):
+    print(image)
+    exif_data = {}
+    try:
+        print("deeeeeeeeeeeeeeeeeeeeeeee")
+        info = image._getexif()
+        print("frfrfrfr")
+        if info is not None:
+            for tag, value in info.items():
+                decoded = TAGS.get(tag, tag)
+                exif_data[decoded] = value
+    except AttributeError:
+        print("65656565656")
+        pass
+    return exif_data
+
+
+def display_image_metadata(img_path):
+
+    try:
+        with Image.open(img_path) as img: # with ensure the ressource will be closed
+            print(f"Metadata for {img_path}:")
+            print(f"Format: {img.format}")
+            print(f"Size: {img.size}")
+            print(f"Mode: {img.mode}")
+            exif_data = get_exif_data(img_path)
+            if exif_data:
+                print("EXIF Data:")
+                for key, value in exif_data.items():
+                    print(f"  {key}: {value}")
+            else:
+                print("No EXIF data found.")
+            print()
+    except Exception as e:
+        print(f"Error processing {img_path}: {e}")
+
+if __name__ == '__main__' :
+
+    if len(sys.argv) < 2:
+        print("Usage: scorpion FILE1 [FILE2 ...]")
+        sys.exit(1)
+
+    supported_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp'}
+    files = sys.argv[1:] # all nothing name of program
+
+    for file in files:
+        if os.path.splitext(file)[1].lower() in supported_extensions:
+            display_image_metadata(file)
+        else:
+            print(f"Unsupported file format: {file}")

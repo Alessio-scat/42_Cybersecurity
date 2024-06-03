@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+import os
+from bs4 import BeautifulSoup
+import argparse # parse command-line options 
+import requests
+from urllib.parse import urljoin, urlparse
+
+MAX_INT = 2147483647
+
+def download_img(url, depth, folder, current_depth=0):
+    
+    if current_depth > depth:
+        return
+
+    if not os.path.exists(folder):
+        try:
+            os.makedirs(folder)
+            print(f"Created directory: {folder}")
+        except Exception as e:
+            print(f"Failed to create directory {folder}. Error: {e}")
+            return
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status() # raise an HTTPError for bad responses
+
+        soup = BeautifulSoup(response.text, 'html.parser') # extract code HTML of this page
+        
+        img_tags = soup.find_all('img')
+        # print(img_tags)
+        img_urls = []
+        for img in img_tags:
+            img_src = img.get('src')
+            if img_src and img_src.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp')):
+                full_url = urljoin(url, img_src)
+                # print(full_url)
+                img_urls.append(full_url)
+
+
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to retrieve URL {url}. Error: {e}")
+        return
+    except Exception as e:
+        print(f"An error occurred while processing URL {url}. Error: {e}")
+        return
+
+    for img_url in img_urls:
+        try:
+            img_name = os.path.join(folder, os.path.basename(urlparse(img_url).path)) # do folder/nameImage
+            img_data = requests.get(img_url).content # get binary content 
+            with open(img_name, 'wb') as img_file:
+                img_file.write(img_data)
+            print(f'Downloaded: {img_url}')
+        except Exception as e:
+            print(f'Could not download {img_url}. Error: {e}')
+
+    if current_depth < depth:
+        link_tags = soup.find_all('a', href=True)
+        link_urls = []
+        for link in link_tags:
+            full_url = urljoin(url, link['href'])
+            link_urls.append(full_url)
+
+
+        for link_url in link_urls:
+            if urlparse(link_url).netloc == urlparse(url).netloc: # Network location part
+                download_img(link_url, depth, folder, current_depth + 1)
+
+def check_int(value):
+
+    print(f"{MAX_INT}")
+
+    try:
+        ivalue = int(value)
+        if ivalue < 0:
+            raise argparse.ArgumentTypeError(f"Invalid value: {value}. The depth level must be a non-negative integer.")
+        if ivalue > MAX_INT:
+            raise argparse.ArgumentTypeError(f"Invalid value: {value}. The depth level must not exceed {MAX_INT}.")
+        return ivalue
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"Invalid value: {value}. The depth level must be a non-negative integer.")
+
+
+if __name__ == '__main__' :
+    parser = argparse.ArgumentParser(
+                    prog='Spider',
+                    description='The spider program allow you to extract all the images from a website, recursively, by providing a url as a parameter.',
+                    epilog='42 Cybersecurity')
+
+    # print(parser)
+
+    parser.add_argument('URL', type=str, help='The URL of the website to download images from.')
+    parser.add_argument('-r', action='store_true', help='ecursively downloads the images in a URL received as a parameter.')
+    parser.add_argument('-l', type=check_int, default=5, help='Maximum depth level for recursive download.')
+    parser.add_argument('-p', type=str, default='data', help='Path to save downloaded images.')
+
+    args = parser.parse_args()
+
+    print(args)
+
+    # download_img(args.URL, args.l, args.p)
+    # if args.l and not args.r:
+    #     print("Error: The '-l' option can only be used with the '-r' option.")
+    #     parser.print_help()
+    # else:
+    if args.r:
+        download_img(args.URL, args.l, args.p)
+    else:
+        download_img(args.URL, 0, args.p)
+
