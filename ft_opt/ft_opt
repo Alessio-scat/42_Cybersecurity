@@ -3,6 +3,10 @@
 import argparse
 import re
 import hashlib
+import hmac
+import struct
+import os
+
 
 def create_ft_opt_key(key):
     with open("ft_otp.key", 'w') as f:
