@@ -7,7 +7,7 @@ import hmac
 import struct
 import os
 
-
+#frfffff
 def create_ft_opt_key(key):
     with open("ft_otp.key", 'w') as f:
         f.write(key)
