@@ -6,17 +6,33 @@ import hashlib
 import hmac
 import struct
 import os
+import time
 
-#frfffff
+def generate_totp(key, time_step=30, digits=6):
+    # Convertir le temps actuel en intervalles de temps
+    interval = int(time.time() // time_step)
+    # Convertir l'intervalle en octets
+    counter_bytes = struct.pack(b'!Q', interval)
+    # Générer HMAC-SHA-1
+    hmac_digest = hmac.new(key, counter_bytes, hashlib.sha1).digest()
+    # Troncature dynamique
+    offset = hmac_digest[-1] & 0x0F
+    truncated_hash = hmac_digest[offset:offset+4]
+    # Convertir en entier
+    otp = struct.unpack(b'!I', truncated_hash)[0] & 0x7FFFFFFF
+    # Renvoyer les 6 chiffres
+    otp %= 10**digits
+    return '{:06d}'.format(otp)
+
 def create_ft_opt_key(key):
     with open("ft_otp.key", 'w') as f:
         f.write(key)
 
 # encrypt with sha256
-def encrypt_string(hash_string):
-    sha_signature = \
-        hashlib.sha256(hash_string.encode()).hexdigest()
-    return sha_signature
+# def encrypt_string(hash_string):
+#     sha_signature = \
+#         hashlib.sha256(hash_string.encode()).hexdigest()
+#     return sha_signature
 
 def verif_key(key):
 
@@ -30,11 +46,21 @@ def verif_key(key):
 
     pattern = re.compile(r'^[0-9a-fA-F]{64,}$') # check the 64 characters => pattern object
     if pattern.fullmatch(content): # check if the string match with pattern
-        sha256_content = encrypt_string(content)
-        create_ft_opt_key(sha256_content)
+        # sha256_content = encrypt_string(content)
+        create_ft_opt_key(content)
         print("Key was successfully saved in ft_otp.key.")
     else:
         print("/ft_otp: error: key must be 64 hexadecimal characters")
+
+def load_key(filename):
+    try:
+        with open(filename, 'r') as f:
+            key = f.read().strip()
+            if len(key) < 64 or not all(c in "0123456789abcdefABCDEF" for c in key):
+                raise ValueError("Invalid key format or length")
+            return bytes.fromhex(key)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Key file '{filename}' not found")
 
 if __name__ == '__main__' :
 
@@ -51,5 +77,11 @@ if __name__ == '__main__' :
         print("Usage: ./ft_opt -g key or ./ft_opt -k ft_opt.key")
     elif args.g:
         verif_key(args.g)
-    
+    elif args.k:
+        try:
+            key = load_key(args.k)
+            otp = generate_totp(key)
+            print(otp)
+        except Exception as e:
+            print(f"Error: {e}")
     # print(args)
