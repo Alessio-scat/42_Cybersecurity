@@ -2,24 +2,32 @@
 
 import argparse
 import re
+import hashlib
 
 def create_ft_opt_key(key):
     with open("ft_otp.key", 'w') as f:
         f.write(key)
 
+# encrypt with sha256
+def encrypt_string(hash_string):
+    sha_signature = \
+        hashlib.sha256(hash_string.encode()).hexdigest()
+    return sha_signature
+
 def verif_key(key):
 
-    content = key
+    content = key.strip()
 
     try:
         with open(key, 'r') as file:
-            content = file.read()
+            content = file.read().strip()
     except FileNotFoundError:
         pass
 
-    pattern = re.compile(r'^[0-9a-fA-F]{64,}$')
-    if pattern.search(content):
-        create_ft_opt_key(content)
+    pattern = re.compile(r'^[0-9a-fA-F]{64,}$') # check the 64 characters => pattern object
+    if pattern.fullmatch(content): # check if the string match with pattern
+        sha256_content = encrypt_string(content)
+        create_ft_opt_key(sha256_content)
         print("Key was successfully saved in ft_otp.key.")
     else:
         print("/ft_otp: error: key must be 64 hexadecimal characters")
