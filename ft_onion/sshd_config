@@ -1,0 +1,88 @@
+# SSH daemon configuration file
+
+# Port on which the SSH server listens
+Port 4343
+
+# Protocol versions to support
+Protocol 2
+
+# Host keys
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Logging
+SyslogFacility AUTH
+LogLevel INFO
+
+# Authentication
+PermitRootLogin no            # Disable root login
+PasswordAuthentication yes    # Allow password authentication
+PermitEmptyPasswords no       # Do not allow empty passwords
+AllowUsers onion           # Allow specific users to log in
+
+# Public key authentication
+PubkeyAuthentication yes
+AuthorizedKeysFile      .ssh/authorized_keys
+
+# Enable sftp subsystem
+Subsystem sftp /usr/lib/ssh/sftp-server
+
+# GSSAPI options
+GSSAPIAuthentication no
+GSSAPICleanupCredentials yes
+
+# Accept environment variables
+AcceptEnv LANG LC_*
+
+# X11 forwarding
+X11Forwarding yes
+X11DisplayOffset 10
+PrintMotd no                # Disable printing of the MOTD (Message of the Day)
+PrintLastLog yes            # Print the last login info upon successful login
+
+# MaxStartups: Maximum number of concurrent unauthenticated connections to the SSH daemon
+# MaxSessions: Maximum number of open shell, login, or subsystem (e.g., sftp) sessions per network connection
+# MaxAuthTries: Maximum number of authentication attempts permitted per connection
+# ClientAliveInterval: Send null packets to clients at this interval to keep the connection alive
+# ClientAliveCountMax: Number of unresponsive client pings to tolerate before closing the connection
+# UseDNS: Perform DNS reverse mapping of client IP addresses
+# PermitTunnel: Allow tunneled clear text data to be forwarded via SSH connections
+# PermitUserEnvironment: Allow users to set environment options via ~/.ssh/environment
+# AllowTcpForwarding: Allow TCP forwarding (e.g., port forwarding)
+# GatewayPorts: Enable remote hosts to connect to forwarded ports
+# AllowAgentForwarding: Allow SSH agent forwarding
+# PermitListen: Allow listening ports on the server side
+# PermitUserRC: Allow users to execute ~/.ssh/rc
+# IgnoreRhosts: Ignore ~/.shosts and ~/.rhosts files for authentication
+# RhostsRSAAuthentication: Enable rhosts-based authentication with RSA host authentication
+# HostbasedAuthentication: Enable host-based authentication
+# IgnoreUserKnownHosts: Ignore user's ~/.ssh/known_hosts file
+# UsePAM: Use Pluggable Authentication Modules (PAM) for authentication
+# UsePrivilegeSeparation: Use privilege separation to minimize potential security vulnerabilities
+# Compression: Enable compression of SSH data stream
+# ClientAliveInterval: Send a keepalive message to the server to prevent disconnection
+# ClientAliveCountMax: Number of keepalive messages sent without response before disconnecting
+# PermitRootLogin: Allow or disallow root login via SSH
+
+# Example of additional configurations:
+# MaxStartups 10:30:100
+# MaxSessions 100
+# MaxAuthTries 3
+# ClientAliveInterval 300
+# ClientAliveCountMax 2
+# UseDNS no
+# PermitTunnel no
+# PermitUserEnvironment no
+# AllowTcpForwarding yes
+# GatewayPorts no
+# AllowAgentForwarding yes
+# PermitListen yes
+# PermitUserRC yes
+# IgnoreRhosts yes
+# RhostsRSAAuthentication no
+# HostbasedAuthentication no
+# IgnoreUserKnownHosts no
+# UsePAM yes
+# UsePrivilegeSeparation yes
+# Compression yes
