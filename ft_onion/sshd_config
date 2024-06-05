@@ -19,7 +19,7 @@ LogLevel INFO
 PermitRootLogin no            # Disable root login
 PasswordAuthentication yes    # Allow password authentication
 PermitEmptyPasswords no       # Do not allow empty passwords
-AllowUsers onion           # Allow specific users to log in
+AllowUsers test           # Allow specific users to log in
 
 # Public key authentication
 PubkeyAuthentication yes
