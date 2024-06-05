@@ -1,0 +1,11 @@
+<!-- # Setup Onion Service -->
+
+<!-- HiddenServiceDir /var/lib/tor/ft_onion42/
+HiddenServicePort 80 127.0.0.1:80 -->
+
+HiddenServiceDir /var/lib/tor/ft_onion42/
+HiddenServicePort 8000 unix:/var/run/tor/ft_onion42.sock
+
+<!-- # The HiddenServiceDir line specifies the directory which should contain information and cryptographic keys for your Onion Service. 
+# HiddenServicePort specifies virtual ports
+# .sock to avoid leaking an Service Onion -->
