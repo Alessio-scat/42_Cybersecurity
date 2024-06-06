@@ -6,11 +6,12 @@
 ## define a stop point beginning fuction main
     - break main
 
+## launch program
+    - run
+    
 ## disassemble main
     - disassemble main
 
-## launch program
-    - run
 
 ## define break point before strcmp
     - (gdb) break *0x5655623a
