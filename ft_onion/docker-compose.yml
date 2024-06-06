@@ -9,13 +9,3 @@ services:
     ports:
       - "8080:8080"
       - "4343:4343"
-    volumes:
-      - ./index.html:/var/www/html/index.html
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./sshd_config:/etc/ssh/sshd_config
-      - ./secrets/id_rsa.pub:/home/test/.ssh/authorized_keys
-      - ./torrc:/etc/tor/torrc
-    # expose:
-    #   - "8080"
-    # execute when the container is launch
-    # command: /bin/sh -c "service tor start && nginx -g 'daemon off;'"
