@@ -1,3 +1,5 @@
+# use Ghidra and understanding code and you find the password
+
 look before =>
 
 Dump of assembler code for function main:
@@ -124,3 +126,69 @@ Dump of assembler code for function main:
    0x5655648d <+445>:   pop    %ebx
    0x5655648e <+446>:   pop    %ebp
    0x5655648f <+447>:   ret
+
+## Explain iter loop
+Initialisation
+   local_39 = "00101108097098101114101"
+   local_21 = "d"
+   Première itération
+   sVar2 = strlen(local_21) = 1
+   uVar1 = local_18 = 2
+   sVar2 < 8 est vrai, donc on continue
+   sVar2 = strlen(local_39) = 23
+   bVar4 = uVar1 < sVar2 = 2 < 23 est vrai
+   La boucle continue
+Deuxième itération
+   local_21 = "de"
+   sVar2 = strlen(local_21) = 2
+   uVar1 = local_18 = 5
+   sVar2 < 8 est vrai, donc on continue
+   sVar2 = strlen(local_39) = 23
+   bVar4 = uVar1 < sVar2 = 5 < 23 est vrai
+   La boucle continue
+Troisième itération
+   local_21 = "del"
+   sVar2 = strlen(local_21) = 3
+   uVar1 = local_18 = 8
+   sVar2 < 8 est vrai, donc on continue
+   sVar2 = strlen(local_39) = 23
+   bVar4 = uVar1 < sVar2 = 8 < 23 est vrai
+   La boucle continue
+Quatrième itération
+   local_21 = "dela"
+   sVar2 = strlen(local_21) = 4
+   uVar1 = local_18 = 11
+   sVar2 < 8 est vrai, donc on continue
+   sVar2 = strlen(local_39) = 23
+   bVar4 = uVar1 < sVar2 = 11 < 23 est vrai
+   La boucle continue
+Cinquième itération
+   local_21 = "delab"
+   sVar2 = strlen(local_21) = 5
+   uVar1 = local_18 = 14
+   sVar2 < 8 est vrai, donc on continue
+   sVar2 = strlen(local_39) = 23
+   bVar4 = uVar1 < sVar2 = 14 < 23 est vrai
+   La boucle continue
+Sixième itération
+   local_21 = "delabe"
+   sVar2 = strlen(local_21) = 6
+   uVar1 = local_18 = 17
+   sVar2 < 8 est vrai, donc on continue
+   sVar2 = strlen(local_39) = 23
+   bVar4 = uVar1 < sVar2 = 17 < 23 est vrai
+   La boucle continue
+Septième itération
+   local_21 = "delaber"
+   sVar2 = strlen(local_21) = 7
+   uVar1 = local_18 = 20
+   sVar2 < 8 est vrai, donc on continue
+   sVar2 = strlen(local_39) = 23
+   bVar4 = uVar1 < sVar2 = 20 < 23 est vrai
+   La boucle continue
+Huitième itération
+   local_21 = "delabere"
+   sVar2 = strlen(local_21) = 8
+   uVar1 = local_18 = 23
+   sVar2 < 8 est faux, donc on ne met pas à jour sVar2 ni bVar4
+   La boucle se termine car bVar4 est faux
