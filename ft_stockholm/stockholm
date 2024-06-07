@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import argparse
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+                    prog='stockholm',
+                    description='A specific feature of this type of program is its ability to spread through networks of hundreds of computers. In our case, your program will only affect a small portion of your local files',
+                    epilog='42 Cybersecurity')
+
+    parser.add_argument('-v', '-version', action='store_true', help='how the version of the program')
+    parser.add_argument('-r', '-reverse', action='store_true', help='the key entered as an argument to reverse the infection')
+    parser.add_argument('-s', '--silent', action='store_true', help='the key entered as an argument to reverse the infection')
+
+    args = parser.parse_args()
+
+    if args.v:
+        print("Version 1.0.0")
