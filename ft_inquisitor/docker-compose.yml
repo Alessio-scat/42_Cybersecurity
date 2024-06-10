@@ -1,21 +1,35 @@
 version: '3'
+
 services:
-  ftpserver:
-    image: fauria/vsftpd # container implement a vsftpd server 
+  server:
+    image: fauria/vsftpd
+    container_name: server
+    ports:
       - "21:21"
-      - "20:20"
-      - "21100-21110:21100-21110"
     environment:
-      FTP_USER: user
-      FTP_PASS: pass
-      PASV_ADDRESS: 127.0.0.1
-      PASV_MIN_PORT: 21100
-      PASV_MAX_PORT: 21110
+      - FTP_USER=ftpuser
+      - FTP_PASSWORD=ftppass
+    volumes:
+      - /home/ascatama/Documents:/srv
+    networks:
+      - inquisitor
+
+    client:
+      image: linuxserver/filezilla
+      container_name: client
+      ports:
+        - "5800:5800"
+      # volumes:
+      #   - ./storage:/storage:rw
+      networks:
+      - inquisitor
 
   inquisitor:
     build: .
-    volumes:
-      - .:/app
-    depends_on:
-      - ftpserver
-    entrypoint: ["./inquisitor", "<IP-src>", "<MAC-src>", "<IP-target>", "<MAC-target>"]
+    image: inquisitor
+    container_name: inquisitor
+    networks:
+      - inquisitor
+
+networks:
+  inquisitor:

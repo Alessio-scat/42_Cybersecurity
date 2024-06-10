@@ -1,9 +1,12 @@
 FROM python:3.9-slim
 
+RUN apt-get -y update \
+	&& pip install scapy \
+	&& apt -y install libpcap0.8
+
 WORKDIR /app
 
-COPY . /app
+COPY inquisitor.py .
 
-RUN pip3 install --no-cache-dir -r requirements.txt
-
-CMD ["python3", "inquisitor.py"]
+# CMD ["python3", "inquisitor.py"]
+CMD ["tail", "-f", "/dev/null"]
