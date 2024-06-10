@@ -1,0 +1,21 @@
+version: '3'
+services:
+  ftpserver:
+    image: fauria/vsftpd # container implement a vsftpd server 
+      - "21:21"
+      - "20:20"
+      - "21100-21110:21100-21110"
+    environment:
+      FTP_USER: user
+      FTP_PASS: pass
+      PASV_ADDRESS: 127.0.0.1
+      PASV_MIN_PORT: 21100
+      PASV_MAX_PORT: 21110
+
+  inquisitor:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - ftpserver
+    entrypoint: ["./inquisitor", "<IP-src>", "<MAC-src>", "<IP-target>", "<MAC-target>"]
