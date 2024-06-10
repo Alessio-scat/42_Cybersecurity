@@ -88,28 +88,21 @@ if __name__ == '__main__':
             '.ppsm', '.pps', '.pot', '.pptm', '.pptx', '.ppt', '.xltm', '.xltx', '.xlc', '.xlm', '.xlt', 
             '.xlw', '.xlsb', '.xlsm', '.xlsx', '.xls', '.dotx', '.dotm', '.dot', '.docm', '.docb', '.docx', 
         ]
-        files_to_process = [
-            file  # Include each file found in the final list
-            for ext in extensions  # Iterate over each extension in the wannacry_extensions list
-            for file in glob.glob(os.path.join(verif_infection_dir, f'*{ext}'))  # For each extension, find all matching files in the infection_dir
-        ]
-        # files_to_process = []
-        # for ext in extensions:
-        #     pattern = os.path.join(verif_infection_dir, f'*{ext}')
-        #     matching_files = glob.glob(pattern) # return all file that content extension
-        #     for file in matching_files:
-        #         files_to_process.append(file)
+        
+        files_to_process = []
+        for ext in extensions:
+            pattern = os.path.join(verif_infection_dir, f'*{ext}')
+            matching_files = glob.glob(pattern) # return all file that content extension
+            for file in matching_files:
+                files_to_process.append(file)
 
         if args.reverse:
             key = args.reverse
-            ft_files_to_process = [
-                file for file in glob.glob(os.path.join(verif_infection_dir, '*.ft'))
-            ]
-            # ft_files_to_process = []
-            # pattern = os.path.join(verif_infection_dir, '*.ft')
-            # matching_files = glob.glob(pattern)
-            # for file in matching_files:
-            #     ft_files_to_process.append(file)
+            ft_files_to_process = []
+            pattern = os.path.join(verif_infection_dir, '*.ft')
+            matching_files = glob.glob(pattern)
+            for file in matching_files:
+                ft_files_to_process.append(file)
 
             for file_path in ft_files_to_process:
                 decrypt_file(file_path, key, args.silent)
