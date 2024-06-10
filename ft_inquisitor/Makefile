@@ -2,7 +2,7 @@ SERVER	:= server
 CLIENT	:= client
 
 
-.PHONY: all clean prune fclean server client inquisitor run
+.PHONY: all clean prune fclean server client inquisitor show
 
 all:
 	docker-compose up --build
@@ -24,7 +24,7 @@ server:
 	docker exec -it server /bin/bash
 
 client:
-	docker exec -it client /bin/bash
+	docker exec -it client /bin/sh
 
 inquisitor:
 	docker exec -it inquisitor /bin/bash
@@ -34,6 +34,6 @@ MAC_SV := $(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{
 IP_CL := $(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(CLIENT))
 MAC_CL := $(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $(CLIENT))
 
-run	:
+show:
 	@echo "Execute: "
-	@echo ./$(NAME) $(IP_SV) $(MAC_SV) $(IP_CL) $(MAC_CL)
+	@echo ./inquisitor.py $(IP_SV) $(MAC_SV) $(IP_CL) $(MAC_CL)

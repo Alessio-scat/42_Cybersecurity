@@ -1,11 +1,12 @@
-version: '3'
+version: '3.8'
 
 services:
   server:
     image: fauria/vsftpd
     container_name: server
     ports:
-      - "21:21"
+      # - "21:21"
+      - "30000-30009:30000-30009"
     environment:
       - FTP_USER=ftpuser
       - FTP_PASSWORD=ftppass
@@ -14,14 +15,14 @@ services:
     networks:
       - inquisitor
 
-    client:
-      image: linuxserver/filezilla
-      container_name: client
-      ports:
-        - "5800:5800"
-      # volumes:
-      #   - ./storage:/storage:rw
-      networks:
+  client:
+    image: jlesage/filezilla
+    container_name: client
+    ports:
+      - "5800:5800"
+    volumes:
+      - ./storage:/storage:rw
+    networks:
       - inquisitor
 
   inquisitor:
