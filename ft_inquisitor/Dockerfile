@@ -8,5 +8,4 @@ WORKDIR /app
 
 COPY inquisitor.py .
 
-# CMD ["python3", "inquisitor.py"]
 CMD ["tail", "-f", "/dev/null"]

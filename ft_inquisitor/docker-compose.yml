@@ -9,22 +9,15 @@ services:
       - ./inquisitor.py:/app/inquisitor.py
     networks:
       - inquisitor
-    # privileged: true
-    # cap_add:
-    #   - NET_RAW
-    #   - NET_ADMIN
 
 
   server:
-    # image: fauria/vsftpd
     image: delfer/alpine-ftp-server
     container_name: server
     ports:
       - "21000-21010:21000-21010"
     environment:
       - USERS=one|Qwertyuiop1234
-      # - FTP_USER=ftpuser
-      # - FTP_PASSWORD=ftppass
     volumes:
       - ./one:/ftp/one
     networks:

