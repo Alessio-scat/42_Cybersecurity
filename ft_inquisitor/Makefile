@@ -36,4 +36,4 @@ MAC_CL := $(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{
 
 show:
 	@echo "Execute: "
-	@echo ./inquisitor.py $(IP_SV) $(MAC_SV) $(IP_CL) $(MAC_CL)
+	@echo python3 ./inquisitor.py $(IP_SV) $(MAC_SV) $(IP_CL) $(MAC_CL)

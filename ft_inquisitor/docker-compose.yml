@@ -5,8 +5,15 @@ services:
     build: .
     image: inquisitor
     container_name: inquisitor
+    volumes:
+      - ./inquisitor.py:/app/inquisitor.py
     networks:
       - inquisitor
+    # privileged: true
+    # cap_add:
+    #   - NET_RAW
+    #   - NET_ADMIN
+
 
   server:
     # image: fauria/vsftpd
