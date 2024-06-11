@@ -21,7 +21,7 @@ fclean:
 	-docker network rm $(shell docker network ls -q) 2>/dev/null
 
 server:
-	docker exec -it server /bin/bash
+	docker exec -it server /bin/sh
 
 client:
 	docker exec -it client /bin/sh

@@ -1,17 +1,25 @@
 version: '3.8'
 
 services:
+  inquisitor:
+    build: .
+    image: inquisitor
+    container_name: inquisitor
+    networks:
+      - inquisitor
+
   server:
-    image: fauria/vsftpd
+    # image: fauria/vsftpd
+    image: delfer/alpine-ftp-server
     container_name: server
     ports:
-      # - "21:21"
-      - "30000-30009:30000-30009"
+      - "21000-21010:21000-21010"
     environment:
-      - FTP_USER=ftpuser
-      - FTP_PASSWORD=ftppass
+      - USERS=one|Qwertyuiop1234
+      # - FTP_USER=ftpuser
+      # - FTP_PASSWORD=ftppass
     volumes:
-      - /home/ascatama/Documents:/srv
+      - ./one:/ftp/one
     networks:
       - inquisitor
 
@@ -25,12 +33,6 @@ services:
     networks:
       - inquisitor
 
-  inquisitor:
-    build: .
-    image: inquisitor
-    container_name: inquisitor
-    networks:
-      - inquisitor
 
 networks:
   inquisitor:
